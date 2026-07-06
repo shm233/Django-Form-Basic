@@ -1,0 +1,37 @@
+{% extends 'master/base.html' %}
+
+{% block body %}
+  {% include 'master/message.html' %}
+  <div class="container">
+    <a href="{% url 'add_student' %}" class="btn btn-primary">Add Student</a>
+  </div>
+  <div class="container">
+    <table class="table">
+      <thead class="bg-secondary text-white">
+        <tr>
+          <th>Sl</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Image</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in student %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.age }}</td>
+            <td>
+              <img src="/{{ s.image }}" alt="" width="80px" height="80px" />
+            </td>
+            <td>
+              <a href="{% url 'update_student' s.id %}" class="btn btn-warning">Update Info</a>
+              <a href="{% url 'delete_student' s.id %}" class="btn btn-danger">Delete Info</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
